@@ -4,19 +4,7 @@ import './App.scss';
 import usersFromServer from './api/users';
 import todosFromServer from './api/todos';
 import { TodoList } from './components/TodoList';
-
-export interface Todo {
-  id: number;
-  title: string;
-  userId: number;
-  completed: boolean;
-  user: {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-  };
-}
+import { Todo } from './types';
 
 export const App = () => {
   const todosWhithUsers: Todo[] = todosFromServer.map(todo => {
@@ -33,8 +21,8 @@ export const App = () => {
     user: false,
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     if (!query) {
       setErrors(prev => ({ ...prev, title: true }));
@@ -72,9 +60,12 @@ export const App = () => {
             placeholder="Write a title"
             data-cy="titleInput"
             value={query}
-            onChange={e => {
+            onChange={event => {
               setQuery(
-                e.target.value.replace(/[^a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ0-9\s]/g, ''),
+                event.target.value.replace(
+                  /[^a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ0-9\s]/g,
+                  '',
+                ),
               );
               setErrors(prev => ({ ...prev, title: false }));
             }}
@@ -89,8 +80,8 @@ export const App = () => {
           <select
             id="users"
             value={selectedUserId}
-            onChange={e => {
-              setSelectedUserId(+e.target.value);
+            onChange={event => {
+              setSelectedUserId(+event.target.value);
               setErrors(prev => ({ ...prev, user: false }));
             }}
             data-cy="userSelect"

@@ -1,4 +1,4 @@
-import { Todo } from '../../App';
+import { Todo } from '../../types';
 
 export const UserInfo = ({ user }: { user: Todo['user'] }) => {
   return (

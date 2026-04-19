@@ -1,4 +1,4 @@
-import { Todo } from '../../App';
+import { Todo } from '../../types';
 import { TodoInfo } from '../TodoInfo';
 
 export const TodoList = ({ todos }: { todos: Todo[] }) => {

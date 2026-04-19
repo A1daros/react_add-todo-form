@@ -1,4 +1,4 @@
-import { Todo } from '../../App';
+import { Todo } from '../../types';
 import { UserInfo } from '../UserInfo';
 
 export const TodoInfo = ({ todo }: { todo: Todo }) => {
